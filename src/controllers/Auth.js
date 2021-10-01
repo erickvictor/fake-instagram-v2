@@ -37,19 +37,30 @@ const authController = {
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
-        return res.render("auth/login", {error: "Usuario ou senha não existe!"});
+        return res.render("auth/login", {
+          error: "Usuario ou senha não existe!",
+        });
       }
-      
-      if(!bcrypt.compareSync(password, user.password)){
-        return res.render("auth/login", { error: "Usuario ou senha não existe!" });
+
+      if (!bcrypt.compareSync(password, user.password)) {
+        return res.render("auth/login", {
+          error: "Usuario ou senha não existe!",
+        });
       }
+
+      req.session.user = {
+        id: user.id,
+        name: user.name,
+      };
 
       return res.redirect("/home");
     } catch (err) {
       console.log(err);
-      return res.redirect("/login", { error: "Sistema inidisponivel tente novamente!" });
+      return res.redirect("/login", {
+        error: "Sistema inidisponivel tente novamente!",
+      });
     }
-  }
+  },
 };
 
 module.exports = authController;
