@@ -13,7 +13,7 @@ module.exports = (conection, DataTypes) => {
       content: {
         type: DataTypes.STRING(200),
       },
-      userid: {
+      user_id: {
         type: DataTypes.INTEGER,
       },
       create_at: {
