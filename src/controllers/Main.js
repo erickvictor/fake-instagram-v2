@@ -1,4 +1,4 @@
-const { Publication, User } = require("../models");
+const { Publication, User, Comment } = require("../models");
 
 const mainController = {
   async showHome(req, res) {
@@ -8,10 +8,19 @@ const mainController = {
         {
           model: User,
         },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["name"]
+            }
+          ]
+        }
       ],
     });
 
-    return res.render("home", { publications }, console.log(publications));
+    return res.render("home", { publications });
   },
   showCreatePublication(req, res) {
     return res.render("post");

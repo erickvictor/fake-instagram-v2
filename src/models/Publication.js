@@ -30,6 +30,10 @@ module.exports = (conection, DataTypes) => {
     Publication.belongsTo(models.User, {
       foreignKey: "user_id",
     });
+
+    Publication.hasMany(models.Comment, {
+      foreignKey: "publication_id",
+    });
   };
 
   return Publication;
